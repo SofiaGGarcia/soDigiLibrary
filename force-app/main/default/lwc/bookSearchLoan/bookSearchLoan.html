@@ -1,0 +1,85 @@
+<template>
+    <lightning-card title="" icon-name="standard:book">
+        <div class="slds-p-around_medium slds-text-heading_medium">
+        </div>
+
+        <!-- Primera fila: Inputs en una sola línea -->
+        <div class="slds-grid slds-wrap slds-p-horizontal_medium slds-m-bottom_medium">
+            <!-- Input para Search by Title or Author -->
+            <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
+                <lightning-input 
+                    label="Search by Title or Author" 
+                    value={searchTerm} 
+                    onchange={handleSearchTermChange}>
+                </lightning-input>
+            </div>
+
+            <!-- Input para Search Borrower by Name -->
+            <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
+                <lightning-input 
+                    label="Search Borrower by Name" 
+                    value={borrowerSearchTerm} 
+                    onchange={handleBorrowerSearchTermChange}>
+                </lightning-input>
+            </div>
+
+            <!-- Combobox para Select Borrower -->
+            <div class="slds-col slds-size_4-of-12 slds-p-horizontal_medium">
+                <template if:true={contacts}>
+                    <lightning-combobox 
+                        label="Select Borrower" 
+                        value={selectedBorrowerId} 
+                        options={contactOptions} 
+                        onchange={handleBorrowerSelect}>
+                    </lightning-combobox>
+                </template>
+            </div>
+        </div>
+
+        <!-- Segunda fila: Botones centrados debajo de cada input -->
+        <div class="slds-grid slds-wrap slds-p-horizontal_medium slds-m-bottom_medium">
+            <!-- Botón para Search debajo del primer input -->
+            <div class="slds-col slds-size_4-of-12 slds-align_absolute-center">
+                <lightning-button 
+                    label="Search" 
+                    onclick={handleSearch}>
+                </lightning-button>
+            </div>
+
+            <!-- Botón para Search Borrower debajo del segundo input -->
+            <div class="slds-col slds-size_4-of-12 slds-align_absolute-center">
+                <lightning-button 
+                    label="Search Borrower" 
+                    onclick={handleBorrowerSearch}>
+                </lightning-button>
+            </div>
+
+            <!-- Div vacío para completar el espacio de la tercera columna en la segunda fila -->
+            <div class="slds-col slds-size_4-of-12"></div>
+        </div>
+
+        <!-- Contenedor para la tabla centrada -->
+        <div class="slds-grid slds-wrap slds-align_absolute-center">
+            <div class="slds-col slds-size_6-of-12">
+                <template if:true={books}>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={books}
+                        columns={columns}
+                        onrowaction={handleRowAction}
+                        class="slds-m-top_medium">
+                    </lightning-datatable>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>
+
+
+
+
+
+
+
+
+
